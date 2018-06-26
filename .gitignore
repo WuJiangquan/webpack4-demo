@@ -1,0 +1,7 @@
+/node_modules/
+/.idea/
+/src/node_modules
+/src/resource/node_modules
+/src/resourcebank/node_modules
+/_temp
+/.qbcache/

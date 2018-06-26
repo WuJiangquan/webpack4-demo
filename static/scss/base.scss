@@ -1,0 +1,330 @@
+/* line 5, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+
+/* line 22, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+
+html {
+    line-height: 1;
+}
+
+
+/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+
+ol,
+ul {
+    list-style: none;
+}
+
+
+/* line 26, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/* line 28, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+
+caption,
+th,
+td {
+    text-align: left;
+    font-weight: normal;
+    vertical-align: middle;
+}
+
+
+/* line 30, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+
+q,
+blockquote {
+    quotes: none;
+}
+
+
+/* line 103, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+
+q:before,
+q:after,
+blockquote:before,
+blockquote:after {
+    content: "";
+    content: none;
+}
+
+
+/* line 32, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+
+a img {
+    border: none;
+}
+
+
+/* line 116, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+*,
+html {
+    font-family: "Microsoft Yahei", Arial;
+}
+
+a {
+    text-decoration: none;
+}
+
+@import "_dimen";
+@import "_mixins";
+input {
+    outline: none;
+    border: 0;
+}
+
+button {
+    outline: none;
+    border: 0;
+    background: transparent;
+}
+
+.mt20 {
+    margin-top: 20px !important;
+}
+
+.floatL {
+    float: left;
+}
+
+.floatR {
+    float: right;
+}
+
+.hide {
+    display: none !important;
+}
+
+.textCenterBtn {
+    position: relative;
+}
+
+.textCenterBtn .icon-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+input:-webkit-autofill {
+    background-color: transparent !important;
+}
+
+.absolute {
+    position: absolute !important
+}
+
+body,
+html {
+    width: 100%;
+    min-width: 1280px;
+}
+
+body {
+    position: relative;
+    padding-bottom: $footerH;
+    background: $bodyColor;
+}
+
+.page-header {
+    width: 1200px;
+    height: 84px;
+    margin: 0 auto;
+    background: white;
+    @at-root {
+        .logo-wrapper {
+            height: 36px;
+            margin-top: ($headerH - $logoH)/2;
+        }
+        .logo {
+            width: $logoW;
+            height: 100%;
+            margin-right: 20px;
+            border: 0;
+            float: left;
+        }
+        .language-switch {
+            width: 30px;
+            height: 16px;
+            margin-top: 10px;
+            margin-left: 3px;
+            display: block;
+            float: left;
+            color: white;
+            line-height: 16px;
+            text-align: center;
+            background: $lightGray;
+            font-size: 12px;
+            &.live {
+                background: $orange;
+            }
+        }
+        .header-navs {
+            height: $navFz;
+            margin-top: ($headerH - $navFz)/2;
+            &-item {
+                position: relative;
+                float: left;
+                font-size: 16px;
+                font-family: Arial, Helvetica, sans-serif;
+                color: $deepGray;
+                margin-left: 40px;
+                &.active,
+                &:hover {
+                    color: $orange;
+                    cursor: pointer;
+                    .active-line {
+                        width: 100%;
+                        left: 0;
+                    }
+                }
+            }
+            .active-line {
+                position: absolute;
+                left: 50%;
+                background: $orange;
+                height: 1px;
+                width: 0;
+                bottom: -10px;
+                transition: width .5s, left 0.5s;
+            }
+        }
+    }
+}
+
+.page-footer {
+    position: absolute;
+    bottom: 0;
+    height: $footerH;
+    line-height: $footerH;
+    width: 100%;
+    min-width: 1200px;
+    background: $deepBlue;
+    font-size: 12px;
+    line-height: 120x;
+    color: white;
+    @at-root {
+        .footer-navs {
+            width: 779px;
+            margin: 0 auto;
+            &-tips {
+                float: left;
+                margin-right: 24px;
+            }
+            &-item {
+                float: left;
+                margin-right: 30px;
+            }
+        }
+    }
+}
