@@ -8,18 +8,39 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const crypto = require("crypto");
+const fs = require("fs");
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
+}
+
+
+var createHash = (hashFunction,val) =>{
+    var  hashObj = crypto.createHash(hashFunction);
+    hashObj.update(val);
+    var hash = hashObj.digest("hex");
+    return hash;
 }
 
 
 function FileChanges(options){
     this.options = options;
 }
+
+function isStreamFile(fileName){
+    var isImg = /\.(png|jpe?g|gif|svg)(\?.*)?$/.test(fileName);
+    var isVedio = /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/.test(fileName);
+    var isFont = /\.(woff2?|eot|ttf|otf)(\?.*)?$/.test(fileName);
+    return isImg||isVedio||isFont;
+}
+
+
+
 FileChanges.prototype.apply = function(compiler){
     var self = this;
-    let afterEmit  = (compilation, callback)=>{
-        let options = compiler.options;
+    let afterEmit = (compilation, callback)=>{
+        var self = this;
         let stats = compilation.getStats().toJson({
             hash: true,
             publicPath: true,
@@ -30,11 +51,18 @@ FileChanges.prototype.apply = function(compiler){
             errorDetails: false,
             timings: false
         })
-        let assetPath = (stats.publicPath && self.options.fullPath) ? stats.publicPath : '';
-        let assetsByChunkName = stats.assetsByChunkName
-        let seenAssets = {}
-        let chunks = Object.keys(assetsByChunkName)
-        chunks.push('')// push "unamed" chunk
+        let hashFunction = this.options.hashFunction || compilation.outputOptions.hashFunction || "md5";
+        var hashs = {};
+        for(var pro in compilation.assets){
+            var val = compilation.assets[pro]._value;
+            var children = compilation.assets[pro].children;
+            if(val&&!isStreamFile(pro)&&/\.css/.test(pro)){
+                hashs[pro] = createHash(hashFunction,val);
+            }else if(children &&/\.js/.test(pro)){
+                var file = fs.readFileSync(compilation.assets[pro].existsAt,"utf-8");
+                hashs[pro]  =  createHash(hashFunction,file);
+            }
+        }
         callback();
     }
     if (compiler.hooks){
@@ -44,7 +72,7 @@ FileChanges.prototype.apply = function(compiler){
             callback();
         })
     }else{
-        compiler.plugin('after-emit',afterEmit)
+        compiler.plugin('emit',emit)
     }
 }
 
@@ -67,6 +95,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     output: {
         path: config.build.assetsRoot,
         filename: utils.assetsPath('js/[name].[chunkhash].js'),
+        hashFunction : "md5",
         chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
     },
     optimization: {
@@ -116,7 +145,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         new FileChanges({
             url : "http://localhost/",
             params : {
-
+                appid : "123456",
+                publishPath : ""
             }
         })
     ]
