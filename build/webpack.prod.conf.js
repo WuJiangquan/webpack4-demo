@@ -94,9 +94,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     devtool: config.build.devtool,
     output: {
         path: config.build.assetsRoot,
-        filename: utils.assetsPath('js/[name].[chunkhash].js'),
+        filename: utils.assetsPath('js/[name].[contenthash].js'),
         hashFunction : "md5",
-        chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
+        chunkFilename: utils.assetsPath('js/[name].[contenthash].js')
     },
     optimization: {
         runtimeChunk: {
@@ -123,7 +123,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: "css/[name].[hash].css"
+            filename: "css/[name].[contenthash].css"
         }),
         // copy custom static assets
         new CopyWebpackPlugin([{

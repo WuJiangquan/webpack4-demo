@@ -79,7 +79,8 @@ module.exports = {
                     loader: "url-loader",
                     options: {
                         limit: 1000,
-                        name: utils.assetsPath('img/[name].[hash:7].[ext]')
+                        quality: 85,
+                        name: utils.assetsPath('img/[name].[hash].[ext]')
                     }
                 }
             ]
@@ -88,14 +89,14 @@ module.exports = {
             loader: 'url-loader',
             options: {
                 limit: 20000,
-                name: utils.assetsPath('media/[name].[hash:7].[ext]')
+                name: utils.assetsPath('media/[name].[hash].[ext]')
             }
         }, {
             test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
             loader: 'url-loader',
             options: {
                 limit: 20000,
-                name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+                name: utils.assetsPath('fonts/[name].[hash].[ext]')
             }
         }, {
             test: /\.html$/,
